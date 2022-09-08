@@ -17,7 +17,7 @@ const Dashboard = (props) => {
     }
 
     useEffect(()=>{
-        let url = `${configs.regIDurl}/api/init-process`;
+        let url = `${configs.regIDurl}/api/total-reg-checked`;
         
         axios.get(url)
           .then(function (response) {
