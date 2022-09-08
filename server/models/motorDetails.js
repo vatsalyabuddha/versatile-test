@@ -7,8 +7,8 @@ async function fetchAllMotorData(){
         return data[0];
     }catch(err){
         console.log("############Error",err);
+        throw err;
     }
-    console.log("Track!!!!!!");
 }
 
 async function insertIntoMotorDetails(params){
@@ -20,8 +20,8 @@ async function insertIntoMotorDetails(params){
         return data;
     }catch(err){
         console.log("############Error",err);
+        throw err;
     }
-    console.log("Track!!!!!!");
 }
 
 async function fetchByRegNumber(regNumber){
@@ -32,8 +32,8 @@ async function fetchByRegNumber(regNumber){
         return data;
     }catch(err){
         console.log("############Error",err);
+        throw err;
     }
-    console.log("Track!!!!!!");
 }
 
 
