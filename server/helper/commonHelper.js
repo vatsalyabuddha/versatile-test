@@ -10,6 +10,7 @@ const sendPostRequest = function (query, options) {
         var protocolStr = 'https';
         options.method = 'POST';
 
+        //console.log("Query:",query);
         if (options.headers) {
             if (options.headers['Content-Type'] && options.headers['Content-Type'] == 'application/json') {
                 queryStr = JSON.stringify(query);
@@ -37,6 +38,7 @@ const sendPostRequest = function (query, options) {
         data.method = options.method;
         data.request = query;
         data.response = {};
+        //console.log("Options:",data);
         var request = protocol.request(options, function (response) {
             response.setEncoding('utf8');
             var responseData = '';
