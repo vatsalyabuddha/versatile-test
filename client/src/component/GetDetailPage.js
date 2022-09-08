@@ -42,11 +42,12 @@ const GetDetailPage = (props) => {
         setTimeout(() => {
             var modal = document.getElementById("myModalUserdata");
             modal.style.display = "none";
-            serError("Sorry No Data is available")
-        }, 5000);
+            
+        }, 3000);
     }
 
     const onChangeFile = (e) => {
+        setUserData("")
         showloader()
         serError("")
 
@@ -72,12 +73,13 @@ const GetDetailPage = (props) => {
             .catch(function (response) {
                 //handle error
                 console.log(response);
-               
+                serError("Sorry No Data is available")
                 removeLoader()
             });
     }
 
     const onRegSubmit = () => {
+        setUserData("")
         serError("")
         showloader();
         let url = `${configs.regIDurl}/api/init-process`;
@@ -88,11 +90,12 @@ const GetDetailPage = (props) => {
           .then(function (response) {
             console.log(response);
             removeLoader()
-            setUserData(response);
+            setUserData(response.data);
           })
           .catch(function (error) {
             console.log(error);
             removeLoader();
+            serError("Sorry No Data is available")
            
           });
 
@@ -193,7 +196,7 @@ const GetDetailPage = (props) => {
         ]
         return (
             <div className='mainUser upload'>
-                <h2>UP14K1184</h2>
+                <h2>Details</h2>
                 <div className='lower'>
                     {data.map((item, i) => (
                         <div className='lineUser'>
