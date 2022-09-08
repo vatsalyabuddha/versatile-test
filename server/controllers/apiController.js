@@ -3,10 +3,21 @@ const vahanController = require('./vahanController');
 const motorModel = require('../models/motorDetails');
 const communicationController = require('./communicationController');
 const communicationModel = require('../models/communicationModel');
+const imageUploadController = require('./imageUploadController');
 
 async function processVahanDataFetch(req,res){
     try{
-        const regNumber = req.body.regNumber;
+        let regNumber;
+        if(req.body && req.body.regNumber){
+            regNumber = req.body.regNumber;
+        }else{
+            console.log("Track1");
+           regNumber = await imageUploadController.imageUploadController(req,res);
+        }
+        
+        console.log("RegNUmber:",regNumber)
+        regNumber = "HR12AA4191";
+        
         let response;
         //check if the regNumber is already checked
         let ifExists = await motorModel.fetchByRegNumber(regNumber);

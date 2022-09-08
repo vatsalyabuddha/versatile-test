@@ -11,7 +11,7 @@ const sendEmailController = async (req, res) => {
     const response = await communicationService.sendEmail(emailList);
     return res.status(200).send(response);
   } catch (e) {
-    return res.status(400).send(e);
+    throw e;
   }
 };
 const sendSmsController = async (req, res) => {
@@ -21,7 +21,7 @@ const sendSmsController = async (req, res) => {
     console.log(response,"contoller")
     return response;
   } catch (e) {
-    return res.status(400).send(e);
+    throw e;
   }
 };
 
