@@ -81,6 +81,7 @@ const GetDetailPage = (props) => {
         serError("")
         showloader();
         let url = `${configs.regIDurl}/api/init-process`;
+        
         axios.post(url, {
             regNumber: redId
           })
