@@ -9,6 +9,7 @@ async function processVahanDataFetch(regNumber){
     //fetch vehicle details from vahan
     let data = await vahanController.fetchRegistrationDetails(regNumber);
     data = data['data'];
+    console.log("Res Data:",data);
     // handling Uninsured vehicle
     let current_date = new Date();
     let insurance_upto_date = new Date(data['registration_date']);
@@ -24,21 +25,21 @@ async function processVahanDataFetch(regNumber){
 
     // process motor details
     let insertData = "("+
-                    data['registration_number']+","+
-                    data['maker_model']+","+
+                    "'"+ data['registration_number']+"'"+","+
+                    "'"+  data['maker_model']+"'"+","+
                     insurance_status+","+
-                    data['owner_name']+","+
-                    data['rto_code']+","+
-                    data['rto_name']+","+
-                    data['rto_city_id']+","+
-                    data['rto_city_name']+","+
-                    data['rto_state_id']+","+
-                    data['rto_state_name']+","+
-                    data['registration_date']+","+
-                    data['insurance_upto']+","+
-                    data['fitness_upto']+","+
-                    is_communication_required+",";
-    console.log("insertData:",insertData);
+                    "'"+  data['owner_name']+"'"+","+
+                    "'"+  data['rto_code']+"'"+","+
+                    "'"+  data['rto_name']+"'"+","+
+                    "'"+  data['rto_city_id']+"'"+","+
+                    "'"+  data['rto_city_name']+"'"+","+
+                    "'"+  data['rto_state_id']+"'"+","+
+                    "'"+  data['rto_state_name']+"'"+","+
+                    "'"+  data['registration_date']+"'"+","+
+                    "'"+  data['insurance_upto']+"'"+","+
+                    "'"+ data['fitness_upto']+"'"+","+
+                    is_communication_required+")";
+    //console.log("insertData:",insertData);
     // store in Db
     let res = await motorModel.insertIntoMotorDetails(insertData);
 
