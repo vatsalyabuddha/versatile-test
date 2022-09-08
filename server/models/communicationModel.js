@@ -2,10 +2,10 @@ const db = dbConnection;
 
 async function insertCommunicationDetails(params){
     try{
-        let sql = "INSERT INTO `versatile`.`communication_details` (`communication_type`,`reg_number`,`communication_date`) VALUES";
+        let sql = "INSERT INTO `versatile`.`communication_details` (`communication_type`,`reg_number`) VALUES";
         let insertSQL = sql + params;
         let data = await db.promise().query(insertSQL);
-        console.log("############Res",data);
+        //console.log("############Res",data);
         return data;
     }catch(err){
         console.log("############Error",err);
@@ -20,7 +20,7 @@ async function updateCommunicationDetails(params){
                         + "'" + "WHERE reg_number = '" + params.reg_number +"'";
         console.log("updateQuery:",finalSQL);
         let data = await db.promise().query(finalSQL);
-        console.log("############Res",data);
+        //console.log("############Res",data);
         return data;
     }catch(err){
         console.log("############Error",err);
