@@ -1,15 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from './Box'
 import Table from './Table'
-import data from "./list.json"
+// import data from "./list.json"
+import configs from './configs'
+import axios from 'axios'
 
 const Dashboard = () => {
+
+    let [data, setData] = useState([])
 
     const renderTop = () => {
         return (
             <div>renderTop</div>
         )
     }
+
+    useEffect(()=>{
+        let url = `${configs.regIDurl}/api/init-process`;
+        
+        axios.get(url)
+          .then(function (response) {
+            console.log(response);
+            setData(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+            // serError("Sorry No Data is available")
+           
+          });
+
+    },[])
 
     let insuredVehicle = data.filter(item=> item.insurance_status>0);
     let unInsuredVehicle = data.filter(item=> item.insurance_status<0);
@@ -98,8 +118,6 @@ const Dashboard = () => {
                     <div className='box-con'>{tileData.map((item, i) => i<6 && <Box label={item.label} id={item.label} number={item.number} color="green" red={item.label === month} />)}</div>
                     <div className='box-con'>{tileData.map((item, i) => i>5 && <Box label={item.label} id={item.label} number={item.number} color="green" red={item.label === month} />)}</div>
                 </div>
-
-
             </div>
         )
     }
