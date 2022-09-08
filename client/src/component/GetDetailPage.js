@@ -53,7 +53,7 @@ const GetDetailPage = (props) => {
         console.log(e)
         console.log(e.target.files);
         // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        let url = `${configs.docAPI}/upload/image`;
+        let url = `${configs.regIDurl}/api/init-process`;
         let key = "number_plate_image";
         let uploadData = new FormData();
         uploadData.append(key, e.target.files[0])
