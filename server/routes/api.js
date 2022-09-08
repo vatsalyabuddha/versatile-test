@@ -9,11 +9,10 @@ router.get('/',(req,res) => {
 })
 
 router.post('/init-process',(req,res) => {
-    const regNumber = req.body.regNumber;
-    console.log("Req : Body:",req.body);
-    const response = apiController.processVahanDataFetch(regNumber);
-
-    res.status(200).send(response.message);
+    // const regNumber = req.body.regNumber;
+    // const response = apiController.processVahanDataFetch(req,res);
+    // res.status(200).send(response.message);
+    apiController.processVahanDataFetch(req,res);
 })
 
 router.post('/process-reg',(req,res) => {
@@ -22,9 +21,10 @@ router.post('/process-reg',(req,res) => {
 })
 
 router.get('/total-reg-checked', async (req,res) => {
-    const response = await apiController.fetchAllMotorData();
-    console.log("API:Route:",response);
-    res.status(200).send(response);
+    // const response = await apiController.fetchAllMotorData();
+    // console.log("API:Route:",response);
+    // res.status(200).send(response);
+    apiController.fetchAllMotorData(req,res);
 })
 
 router.get('/total-uninsured-reg',(req,res) => {
