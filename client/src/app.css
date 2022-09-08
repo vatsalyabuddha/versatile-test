@@ -330,7 +330,7 @@
 }
 .inputDiv input{
     border: navajowhite;
-    width: 100%;
+    width: 90%;
     height: 35px;
     font-size: 25px;
     color: #4f4e4e;
@@ -514,5 +514,15 @@ p {
     border-radius: 5px;
 }
 .myModalUserdata{
+
+}
+.mainUser{
+
+}
+.mainUser .lower{
+
+}
+
+.mainUser .lower .lineUser{
     
 }

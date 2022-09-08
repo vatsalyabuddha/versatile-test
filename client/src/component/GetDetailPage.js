@@ -7,7 +7,10 @@ import axios from "axios"
 
 const GetDetailPage = (props) => {
     const [input, setInput] = useState({ to: "", from: "" })
-    const [isUserPopup, setUserPopup] = useState(false)
+    const [isUserPopup, setUserPopup] = useState(false);
+    const [redId, setRegId] = useState("");
+    const [userData, setUserData] = useState({})
+    const [loader, setLoader] = useState(false)
 
     const cityList = configs.cityList;
 
@@ -28,14 +31,26 @@ const GetDetailPage = (props) => {
 
     const gotoHome = () => props.gotoHome();
 
-    const onChangeFile = (e) => {
-         var modal = document.getElementById("myModalUserdata");
+    const showloader=()=>{
+        var modal = document.getElementById("myModalUserdata");
         modal.style.display = "block";
-        
+
+    }
+
+    const removeLoader=()=>{
+        setTimeout(() => {
+            var modal = document.getElementById("myModalUserdata");
+            modal.style.display = "none";
+        }, 1000);
+    }
+
+    const onChangeFile = (e) => {
+        showloader()
+
         console.log(e)
         console.log(e.target.files);
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        let url = "";
+        // const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+        let url = `${configs.docAPI}/upload/image`;
         let key = "number_plate_image";
         let uploadData = new FormData();
         uploadData.append(key, e.target.files[0])
@@ -48,11 +63,48 @@ const GetDetailPage = (props) => {
             .then(function (response) {
                 //handle success
                 console.log(response);
+                removeLoader()
+                setUserData(response)
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
+                removeLoader()
             });
+    }
+
+    const onRegSubmit = () => {
+        showloader();
+        let url = `${configs.regIDurl}/api/init-process`;
+        axios.post(url, {
+            regNumber: redId
+          })
+          .then(function (response) {
+            console.log(response);
+            removeLoader()
+            setUserData(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+            removeLoader()
+          });
+
+        //hit submit API for Reg  Num
+    }
+
+    const renderInputPopup = () => {
+        return (
+            <div className='pad-20 upload'>
+                <h2>Kindly Fill the Registration Number</h2>
+                <div className='inputDiv'>
+                    <input type="text" value={redId} onChange={(e) => setRegId(e.target.value)} />
+                </div>
+                <div className='df-jc'>
+                    <div className='pad-10 mar-10'><Button btnText="Submit" color="red" click={onRegSubmit} /></div>
+                    {/* <div className='pad-10 mar-10'><Button btnText="Close" color="red"  click={changePage} /></div> */}
+                </div>
+            </div>
+        )
     }
 
 
@@ -73,6 +125,9 @@ const GetDetailPage = (props) => {
                             </input>
                         </div>
                     </div>
+
+                    {renderInputPopup()}
+
 
                     <div class="modal-content">
                         {/* <p>Some text in the Modal..</p> */}
@@ -99,17 +154,58 @@ const GetDetailPage = (props) => {
         )
     }
 
+    const renderUser = () => {
+        let userData =  {
+            "id": 7,
+            "registration_number": "HR12AA4771",
+            "maker_model": "TVS MOTOR COMPANY LTD TVS STAR CITY PLUS",
+            "insurance_status": -1,
+            "owner_name": "VINIT",
+            "rto_code": "HR12",
+            "rto_name": "Rohtak",
+            "rto_city_id": "85",
+            "rto_city_name": "Rohtak",
+            "rto_state_id": "13",
+            "rto_state_name": "Haryana",
+            "registration_date": "2016-02-02T18:30:00.000Z",
+            "insurance_upto": "2022-01-06T18:30:00.000Z",
+            "fitness_upto": "2030-12-14T18:30:00.000Z",
+            "is_communication_required": 1,
+            "status_id": 0,
+            "created_date": "2022-09-08T19:25:26.000Z",
+            "updated_date": "2022-09-08T19:25:26.000Z"
+        }
+
+        let data = [
+            { key: "Owner Name", value: userData.owner_name },
+            { key: "Registration Number", value: userData.registration_number },
+            { key: "Registration Date", value: userData.registration_date.slice(0,10 ) },
+            { key: "Insurance Uptu", value: userData.insurance_upto.slice(0,10 ) },
+            { key: "ddd", value: userData.message },
+        ]
+        return (
+            <div className='mainUser upload'>
+                <h2>UP14K1184</h2>
+                <div className='lower'>
+                    {data.map((item, i) => (
+                        <div className='lineUser'>
+                            <span className='left'>{item.key}</span>
+                            <span className='right'>{item.value}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
     const renderUserPopup = () => {
-        let loader = true
         return (
             <div id="myModalUserdata" class="modal">
                 <div class="modal-content modalInputMianDiv">
                     {loader ?
                         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                         :
-                        <div className='pad-20'>
-                            <h2>Kindly Fill the Registration Number</h2>
-                        </div>
+                        renderUser()
                     }
 
                 </div>
@@ -134,7 +230,7 @@ const GetDetailPage = (props) => {
     const renderTop = () => {
         return (
             <div className='df-jsb top'>
-                <div className='left'>{renderLeftBlock()}</div>
+                {/* <div className='left'>{renderLeftBlock()}</div> */}
                 <div className='right'>{renderRightBlock()}</div>
             </div>
         )
@@ -152,7 +248,7 @@ const GetDetailPage = (props) => {
                 {renderTop()}
                 {renderBottom()}
                 {renderUserPopup()}
-                
+                { renderUser()}
             </div>
         </div>
     )

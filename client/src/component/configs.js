@@ -29,7 +29,10 @@ let configs = {
         "Uttar Pradesh",
         "Uttarakhand",
         "West Bengal"
-    ]
+    ],
+    regIDurl:"",
+    listRegurl:"",
+    docAPI:"",
 }
 
 
