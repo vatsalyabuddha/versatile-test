@@ -24,6 +24,18 @@ async function insertIntoMotorDetails(params){
     console.log("Track!!!!!!");
 }
 
+async function fetchByRegNumber(regNumber){
+    try{
+        let sql = "select * from `versatile`.`motor_details` where registration_number = " + "'"+regNumber+"'";
+        let data = await db.promise().query(sql);
+        console.log("##############Data:",data);
+        return data;
+    }catch(err){
+        console.log("############Error",err);
+    }
+    console.log("Track!!!!!!");
+}
 
 
-module.exports = {fetchAllMotorData, insertIntoMotorDetails};
+
+module.exports = {fetchAllMotorData, insertIntoMotorDetails, fetchByRegNumber};
