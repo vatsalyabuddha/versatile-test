@@ -11,14 +11,29 @@ const Dashboard = () => {
         )
     }
 
+    let insuredVehicle = data.filter(item=> item.insurance_status>0);
+    let unInsuredVehicle = data.filter(item=> item.insurance_status<0);
+
+    const getArrByList =(key)=>{
+        let arr = [];
+        data.forEach(item=>{
+            if(!arr.includes(item[key])){
+                arr.push(item[key])
+            }
+        })
+        return arr
+    }
+
+   
+
     const renderMiddle = () => {
         let tileData = [
-            { label: "Vehicles", number: 100 },
-            { label: "Unique Vehicles", number: 100 },
-            { label: "Insured", number: 100 },
-            { label: "Uninsured", number: 100 },
-            { label: "Vehicle Category", number: 100 },
-            { label: "Location", number: 100 },
+            { label: "Vehicles", number: data.length },
+            { label: "Unique Vehicles", number: data.length },
+            { label: "Insured", number: insuredVehicle.length },
+            { label: "Uninsured", number: unInsuredVehicle.length },
+            { label: "Vehicle Category", number: getArrByList("maker_model") && getArrByList("maker_model").length },
+            { label: "Location", number: getArrByList("rto_name") && getArrByList("rto_name").length },
         ]
         return (
             <div className='Dashboardmiddle'>
@@ -45,21 +60,29 @@ const Dashboard = () => {
 
         }
     }
+
+    const getMonthArrByList=(key)=>{
+       
+        let filterd = data.filter(item=>item.insurance_upto && item.insurance_upto.slice(5, 7) === key )
+        
+        return filterd.length
+    }
+
     const renderBottom = () => {
 
-        let tileData = [
-            { label: "Jan", number: 100 },
-            { label: "Feb", number: 100 },
-            { label: "Mar", number: 100 },
-            { label: "Apr", number: 100 },
-            { label: "May", number: 100 },
-            { label: "Jun", number: 100 },
-            { label: "Jul", number: 100 },
-            { label: "Aug", number: 100 },
-            { label: "Sep", number: 100 },
-            { label: "Oct", number: 100 },
-            { label: "Nov", number: 100 },
-            { label: "Dec", number: 100 },
+         let tileData = [
+            { label: "Jan", number: getMonthArrByList("01") },
+            { label: "Feb", number: getMonthArrByList("02") },
+            { label: "Mar", number: getMonthArrByList("03") },
+            { label: "Apr", number: getMonthArrByList("04") },
+            { label: "May", number: getMonthArrByList("05") },
+            { label: "Jun", number: getMonthArrByList("06") },
+            { label: "Jul", number: getMonthArrByList("07") },
+            { label: "Aug", number: getMonthArrByList("08") },
+            { label: "Sep", number: getMonthArrByList("09") },
+            { label: "Oct", number: getMonthArrByList("10") },
+            { label: "Nov", number: getMonthArrByList("11") },
+            { label: "Dec", number: getMonthArrByList("12") },
           
         ]
 
@@ -68,9 +91,9 @@ const Dashboard = () => {
         let month = getMonth(date.getMonth())
         return (
             <div className='bottom'>
-                <div className='df-jc head'><h2>Expiry Data </h2><span>Last updated : 5/9/22</span></div>
-                
-                
+                <div className='df-jc head'><h2>Expiry Data </h2>
+                {/* <span>Last updated : 5/9/22</span> */}
+                </div>
                 <div className='Dashboardmiddle'>
                     <div className='box-con'>{tileData.map((item, i) => i<6 && <Box label={item.label} id={item.label} number={item.number} color="green" red={item.label === month} />)}</div>
                     <div className='box-con'>{tileData.map((item, i) => i>5 && <Box label={item.label} id={item.label} number={item.number} color="green" red={item.label === month} />)}</div>
@@ -84,8 +107,8 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h2>Dashboard</h2>
-            {renderTop()}
+            <h2 className='center'>Dashboard</h2>
+            {/* {renderTop()} */}
             {renderMiddle()}
             {renderBottom()}
             <div>
