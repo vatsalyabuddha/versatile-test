@@ -1,26 +1,28 @@
 const express = require('express');
 app = express();
+var http            = require('http').Server(app);
 const router = express.Router()
-const { Sequelize } = require('sequelize');
-var mysql = require('mysql');
+// var mysql = require('mysql');
 var bodyParser = require('body-parser')
 
-require('dotenv').config();
+// require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-var dbConnection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Root@123"
-  });
+var dbConnection = require('./models/db');
+
+// var dbConnection = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "Root@123"
+//   });
   
-  dbConnection.connect(function(err) {
-    if (err) throw err;
-    console.log("DB Connected!");
-});
+//   dbConnection.connect(function(err) {
+//     if (err) throw err;
+//     console.log("DB Connected!");
+// });
 
 
 // Routes 
@@ -33,8 +35,8 @@ app.use('/api',apiRoute);
 app.use('/communication',communicationRoute);
 app.use('/vahan',vahanRoute);
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
  
-app.listen(PORT, () =>  {
-    console.log(`Listening on Port ${PORT}`);
-})
+http.listen(3000, '0.0.0.0',function(){;
+    console.log("listening on port 3000");
+});
