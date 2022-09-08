@@ -53,6 +53,9 @@ const sendSms = ( mobileList ) => {
         let queryParams = {
             template_name: "MOTORSHAREQUOTE_UPDATE_INS",
             sent_to: JSON.stringify(mobileList),
+            sms_template : JSON.stringify({
+                URL : 'https://dev2.insurancedekho.com/'
+            })
         };
         try {
             let result = await sendPostRequest(queryParams, options);
