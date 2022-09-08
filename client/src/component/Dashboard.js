@@ -1,5 +1,7 @@
 import React from 'react'
 import Box from './Box'
+import Table from './Table'
+import data from "./list.json"
 
 const Dashboard = () => {
 
@@ -86,6 +88,9 @@ const Dashboard = () => {
             {renderTop()}
             {renderMiddle()}
             {renderBottom()}
+            <div>
+                <Table data={data}/>
+            </div>
         </div>
     )
 }

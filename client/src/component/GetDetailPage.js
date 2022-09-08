@@ -9,8 +9,9 @@ const GetDetailPage = (props) => {
     const [input, setInput] = useState({ to: "", from: "" })
     const [isUserPopup, setUserPopup] = useState(false);
     const [redId, setRegId] = useState("");
-    const [userData, setUserData] = useState({})
-    const [loader, setLoader] = useState(false)
+    const [userData, setUserData] = useState("")
+    const [loader, setLoader] = useState(false);
+    const [error, serError] = useState("")
 
     const cityList = configs.cityList;
 
@@ -41,11 +42,13 @@ const GetDetailPage = (props) => {
         setTimeout(() => {
             var modal = document.getElementById("myModalUserdata");
             modal.style.display = "none";
-        }, 1000);
+            serError("Sorry No Data is available")
+        }, 5000);
     }
 
     const onChangeFile = (e) => {
         showloader()
+        serError("")
 
         console.log(e)
         console.log(e.target.files);
@@ -69,11 +72,13 @@ const GetDetailPage = (props) => {
             .catch(function (response) {
                 //handle error
                 console.log(response);
+               
                 removeLoader()
             });
     }
 
     const onRegSubmit = () => {
+        serError("")
         showloader();
         let url = `${configs.regIDurl}/api/init-process`;
         axios.post(url, {
@@ -86,7 +91,8 @@ const GetDetailPage = (props) => {
           })
           .catch(function (error) {
             console.log(error);
-            removeLoader()
+            removeLoader();
+           
           });
 
         //hit submit API for Reg  Num
@@ -110,7 +116,7 @@ const GetDetailPage = (props) => {
 
     const renderRightBlock = () => {
         return (
-            <div>
+            <div className='SearchBlock'>
                 <div className='SearchBlock'>
                     <div className='upload'>
                         <p>Search by Registration ID</p>
@@ -129,8 +135,8 @@ const GetDetailPage = (props) => {
                     {renderInputPopup()}
 
 
-                    <div class="modal-content">
-                        {/* <p>Some text in the Modal..</p> */}
+                    {/* <div class="modal-content">
+                  
                         <div className='pad-20'>
                             <h2>Please select a date range</h2>
                             <p>If you have checked yesterday then simply click on SUBMIT button</p>
@@ -147,7 +153,7 @@ const GetDetailPage = (props) => {
                                 <span>Last updated : <strong>5/9/22</strong></span>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
@@ -155,33 +161,34 @@ const GetDetailPage = (props) => {
     }
 
     const renderUser = () => {
-        let userData =  {
-            "id": 7,
-            "registration_number": "HR12AA4771",
-            "maker_model": "TVS MOTOR COMPANY LTD TVS STAR CITY PLUS",
-            "insurance_status": -1,
-            "owner_name": "VINIT",
-            "rto_code": "HR12",
-            "rto_name": "Rohtak",
-            "rto_city_id": "85",
-            "rto_city_name": "Rohtak",
-            "rto_state_id": "13",
-            "rto_state_name": "Haryana",
-            "registration_date": "2016-02-02T18:30:00.000Z",
-            "insurance_upto": "2022-01-06T18:30:00.000Z",
-            "fitness_upto": "2030-12-14T18:30:00.000Z",
-            "is_communication_required": 1,
-            "status_id": 0,
-            "created_date": "2022-09-08T19:25:26.000Z",
-            "updated_date": "2022-09-08T19:25:26.000Z"
-        }
+        // let userData =  {
+        //     "id": 7,
+        //     "registration_number": "HR12AA4771",
+        //     "maker_model": "TVS MOTOR COMPANY LTD TVS STAR CITY PLUS",
+        //     "insurance_status": -1,
+        //     "owner_name": "VINIT",
+        //     "rto_code": "HR12",
+        //     "rto_name": "Rohtak",
+        //     "rto_city_id": "85",
+        //     "rto_city_name": "Rohtak",
+        //     "rto_state_id": "13",
+        //     "rto_state_name": "Haryana",
+        //     "registration_date": "2016-02-02T18:30:00.000Z",
+        //     "insurance_upto": "2022-01-06T18:30:00.000Z",
+        //     "fitness_upto": "2030-12-14T18:30:00.000Z",
+        //     "is_communication_required": 1,
+        //     "status_id": 0,
+        //     "created_date": "2022-09-08T19:25:26.000Z",
+        //     "updated_date": "2022-09-08T19:25:26.000Z"
+        // }
+        // userData.message = "Hey there the data has been send to your mobile numbers please check.";
+        // userData.is_insured= true
 
         let data = [
             { key: "Owner Name", value: userData.owner_name },
             { key: "Registration Number", value: userData.registration_number },
             { key: "Registration Date", value: userData.registration_date.slice(0,10 ) },
             { key: "Insurance Uptu", value: userData.insurance_upto.slice(0,10 ) },
-            { key: "ddd", value: userData.message },
         ]
         return (
             <div className='mainUser upload'>
@@ -194,6 +201,7 @@ const GetDetailPage = (props) => {
                         </div>
                     ))}
                 </div>
+                <div className='warning'>{userData.message}</div>
             </div>
         )
     }
@@ -202,12 +210,7 @@ const GetDetailPage = (props) => {
         return (
             <div id="myModalUserdata" class="modal">
                 <div class="modal-content modalInputMianDiv">
-                    {loader ?
                         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                        :
-                        renderUser()
-                    }
-
                 </div>
             </div>
         )
@@ -235,20 +238,21 @@ const GetDetailPage = (props) => {
             </div>
         )
     }
-    const renderBottom = () => {
-        return (
-            <div>
+    // const renderBottom = () => {
+    //     return (
+    //         <div>
 
-            </div>
-        )
-    }
+    //         </div>
+    //     )
+    // }
     return (
         <div>
             <div>
                 {renderTop()}
-                {renderBottom()}
+                {/* {renderBottom()} */}
                 {renderUserPopup()}
-                { renderUser()}
+                {userData && renderUser()}
+                {error && <div className='warning center'>{error}</div>}
             </div>
         </div>
     )
