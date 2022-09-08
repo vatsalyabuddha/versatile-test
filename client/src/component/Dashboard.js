@@ -4,8 +4,9 @@ import Table from './Table'
 // import data from "./list.json"
 import configs from './configs'
 import axios from 'axios'
+import Button from './Button'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
     let [data, setData] = useState([])
 
@@ -132,6 +133,7 @@ const Dashboard = () => {
             <div>
                 <Table data={data}/>
             </div>
+            <div className='pad-10 mar-10 center'><Button btnText="Back" color="red" closeColor={true} click={props.gotoHome} /></div>
         </div>
     )
 }

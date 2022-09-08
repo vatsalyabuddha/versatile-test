@@ -165,28 +165,7 @@ const GetDetailPage = (props) => {
     }
 
     const renderUser = () => {
-        // let userData =  {
-        //     "id": 7,
-        //     "registration_number": "HR12AA4771",
-        //     "maker_model": "TVS MOTOR COMPANY LTD TVS STAR CITY PLUS",
-        //     "insurance_status": -1,
-        //     "owner_name": "VINIT",
-        //     "rto_code": "HR12",
-        //     "rto_name": "Rohtak",
-        //     "rto_city_id": "85",
-        //     "rto_city_name": "Rohtak",
-        //     "rto_state_id": "13",
-        //     "rto_state_name": "Haryana",
-        //     "registration_date": "2016-02-02T18:30:00.000Z",
-        //     "insurance_upto": "2022-01-06T18:30:00.000Z",
-        //     "fitness_upto": "2030-12-14T18:30:00.000Z",
-        //     "is_communication_required": 1,
-        //     "status_id": 0,
-        //     "created_date": "2022-09-08T19:25:26.000Z",
-        //     "updated_date": "2022-09-08T19:25:26.000Z"
-        // }
-        // userData.message = "Hey there the data has been send to your mobile numbers please check.";
-        // userData.is_insured= true
+       
 
         let data = [
             { key: "Owner Name", value: userData.owner_name },
@@ -257,6 +236,7 @@ const GetDetailPage = (props) => {
                 {renderUserPopup()}
                 {userData && renderUser()}
                 {error && <div className='warning center'>{error}</div>}
+                <div className='pad-10 mar-10 center'><Button btnText="Back" color="red" closeColor={true} click={props.gotoHome} /></div>
             </div>
         </div>
     )

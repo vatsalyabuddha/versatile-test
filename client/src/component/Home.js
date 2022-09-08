@@ -3,6 +3,7 @@ import Button from './Button'
 import "../app.css"
 import GetDetailPage from './GetDetailPage'
 import Dashboard from './Dashboard'
+import Database from './Database'
 
 const Home = () => {
 
@@ -24,7 +25,7 @@ const Home = () => {
         switch(tab){
             case "getRegNumData" : return <GetDetailPage gotoHome={gotoHome} />;
             case "dashboard" : return <Dashboard gotoHome={gotoHome} />;
-            case "database" : return <GetDetailPage gotoHome={gotoHome} />;
+            case "database" : return <Database gotoHome={gotoHome} />;
             case "expData" : return <GetDetailPage gotoHome={gotoHome} />;
             default: break;
         }
@@ -79,10 +80,10 @@ const Home = () => {
                     <div className='pad-10 mar-10'><Button btnText="Get Reg Num Data" color="red" name="getRegNumData" click={changePage} /></div>
                     <div className='pad-10 mar-10'><Button btnText="Dashboard" color="red" name="dashboard" click={(e)=>changePage(e)} /></div>
                 </div>
-                {/* <div className='df-jc'>
+                <div className='df-jc'>
                     <div className='pad-10 mar-10'><Button btnText="Database" color="red" name="database" click={(e)=>changePage(e)} /></div>
                     <div className='pad-10 mar-10'><Button btnText="Expiry Data" color="red" name="expData" click={(e)=>changePage(e)} /></div>
-                </div> */}
+                </div>
             </div>
         )
     }
