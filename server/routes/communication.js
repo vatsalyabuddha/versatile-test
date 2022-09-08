@@ -1,9 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const Router = require("express");
+const router = Router();
+const communicationController = require("../controllers/communicationController.js");
 
-router.get('/',(req,res) => {
-    res.send('Communication!!');
-})
+router.post("/send-email", (req, res) =>
+  communicationController.sendEmailController(req, res)
+);
+router.post("/send-sms", (req, res) =>
+  communicationController.sendSmsController(req, res)
+);
 
-
-module.exports = router 
+module.exports = router;
