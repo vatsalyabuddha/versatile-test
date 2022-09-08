@@ -465,6 +465,7 @@ p {
 .Dashboardmiddle .box-con{
     display: flex;
     align-items: end;
+    justify-content: center;
 
 }
 .tileBox{
@@ -487,3 +488,31 @@ p {
     border: none;
 }
 
+.green{
+    background-color: #9CB98F;
+}
+.bottom h2 span{
+    text-align: end;
+    font-size: 15px;
+}
+.bottom .head{
+    align-items: center;
+    justify-content: space-evenly;
+}
+.redBG{
+    background-color: #CA5D4E;
+}
+.upload{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 20px 0px;
+}
+.upload input{
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+.myModalUserdata{
+    
+}

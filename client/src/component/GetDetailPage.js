@@ -7,6 +7,7 @@ import axios from "axios"
 
 const GetDetailPage = (props) => {
     const [input, setInput] = useState({ to: "", from: "" })
+    const [isUserPopup, setUserPopup] = useState(false)
 
     const cityList = configs.cityList;
 
@@ -28,6 +29,9 @@ const GetDetailPage = (props) => {
     const gotoHome = () => props.gotoHome();
 
     const onChangeFile = (e) => {
+         var modal = document.getElementById("myModalUserdata");
+        modal.style.display = "block";
+        
         console.log(e)
         console.log(e.target.files);
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
@@ -35,12 +39,6 @@ const GetDetailPage = (props) => {
         let key = "number_plate_image";
         let uploadData = new FormData();
         uploadData.append(key, e.target.files[0])
-        // axios.post(url, uploadData, config)
-        //     .then((res) => {
-        //         console.log("SUCESS::::",res)
-        //     }).catch((err) => {
-        //         console.log("Error::::",err)
-        //     })
         axios({
             method: "post",
             url: url,
@@ -62,6 +60,20 @@ const GetDetailPage = (props) => {
         return (
             <div>
                 <div className='SearchBlock'>
+                    <div className='upload'>
+                        <p>Search by Registration ID</p>
+                        <div className='inputDoc'>
+                            <input
+                                type="file"
+                                accept={`.jpg, .jpeg, .png ${".pdf"}`}
+                                id="reg_no"
+                                disabled={false}
+                                name="upload doc"
+                                onChange={(e) => onChangeFile(e)} capture>
+                            </input>
+                        </div>
+                    </div>
+
                     <div class="modal-content">
                         {/* <p>Some text in the Modal..</p> */}
                         <div className='pad-20'>
@@ -81,25 +93,30 @@ const GetDetailPage = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className='upload'>
-                        <h2>OR</h2>
-                        <p>Search by Registration ID</p>
-                        <div className='inputDoc'>
-                            <input
-                                type="file"
-                                accept={`.jpg, .jpeg, .png ${".pdf"}`}
-                                id="reg_no"
-                                disabled={false}
-                                name="upload doc"
-                                onChange={(e) => onChangeFile(e)} capture>
-                            </input>
-                        </div>
 
-                    </div>
                 </div>
             </div>
         )
     }
+
+    const renderUserPopup = () => {
+        let loader = true
+        return (
+            <div id="myModalUserdata" class="modal">
+                <div class="modal-content modalInputMianDiv">
+                    {loader ?
+                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        :
+                        <div className='pad-20'>
+                            <h2>Kindly Fill the Registration Number</h2>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        )
+    }
+
     const renderLeftBlock = () => {
         return (
             <div className='leftinner  '>
@@ -134,6 +151,8 @@ const GetDetailPage = (props) => {
             <div>
                 {renderTop()}
                 {renderBottom()}
+                {renderUserPopup()}
+                
             </div>
         </div>
     )
