@@ -30,8 +30,8 @@ let configs = {
         "Uttarakhand",
         "West Bengal"
     ],
-    regIDurl:"",
-    listRegurl:"",
+    regIDurl:"http://localhost:8000",
+    listRegurl:"http://localhost:8000",
     docAPI:"",
 }
 
