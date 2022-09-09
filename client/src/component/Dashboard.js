@@ -49,12 +49,12 @@ const Dashboard = (props) => {
 
     const renderMiddle = () => {
         let tileData = [
-            { label: "Vehicles", number: data.length },
+            { label: "Total Vehicles", number: data.length },
             { label: "Unique Vehicles", number: data.length },
-            { label: "Insured", number: insuredVehicle.length },
-            { label: "Uninsured", number: unInsuredVehicle.length },
+            { label: "Insured Vehicles", number: insuredVehicle.length },
+            { label: "Uninsured Vehicles", number: unInsuredVehicle.length },
             { label: "Vehicle Category", number: getArrByList("maker_model") && getArrByList("maker_model").length },
-            { label: "Location", number: getArrByList("rto_name") && getArrByList("rto_name").length },
+            { label: "Different Location", number: getArrByList("rto_name") && getArrByList("rto_name").length },
         ]
         return (
             <div className='Dashboardmiddle'>
@@ -112,7 +112,7 @@ const Dashboard = (props) => {
         let month = getMonth(date.getMonth())
         return (
             <div className='bottom'>
-                <div className='df-jc head'><h2>Expiry Data </h2>
+                <div className='df-jc head'><h2>Month Wise Expiry Data </h2>
                 {/* <span>Last updated : 5/9/22</span> */}
                 </div>
                 <div className='Dashboardmiddle'>
@@ -126,7 +126,7 @@ const Dashboard = (props) => {
 
     return (
         <div>
-            <h2 className='center'>Dashboard</h2>
+            <h1 className='center dash-head'>Dashboard</h1>
             {/* {renderTop()} */}
             {renderMiddle()}
             {renderBottom()}

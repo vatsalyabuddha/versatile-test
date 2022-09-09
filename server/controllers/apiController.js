@@ -16,7 +16,7 @@ async function processVahanDataFetch(req,res){
         }
         
         console.log("RegNUmber:",regNumber)
-        regNumber = "HR12AA4191";
+        //regNumber = "HR12AA4196";
         
         let response;
         //check if the regNumber is already checked
@@ -33,7 +33,7 @@ async function processVahanDataFetch(req,res){
             var Difference_In_Time = current_date.getTime() - created_date.getTime();
             var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
-            if(Difference_In_Days > 0){
+            if(Difference_In_Days > 15){
                 //insert into communication table
                 let insertCommuData = "("+
                             "'SMS'"+","+
@@ -53,7 +53,7 @@ async function processVahanDataFetch(req,res){
                     let updateCommuData = await communicationModel.updateCommunicationDetails(updateData);
                     response.message ="Registration Number is uninsured. Communication sent.";
                     response.is_inssured =-1;
-                    
+
                 }else{
                     let updateData = {
                         status_id : -1,
@@ -69,7 +69,7 @@ async function processVahanDataFetch(req,res){
                     registration_number : ifExists[0][0]['registration_number'],
                     registration_date : ifExists[0][0]['registration_date'],
                     insurance_upto : ifExists[0][0]['insurance_upto'],
-                    message : "",
+                    message : "This registration number was already checked within the communication limit.",
                     is_inssured : ifExists[0][0]['insurance_status']
                 };
             }

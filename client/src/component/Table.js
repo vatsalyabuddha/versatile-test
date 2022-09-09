@@ -23,7 +23,7 @@ const Table = (props) => {
     <th>Captured Date</th>
     <th>Location</th>
     <th>Insurance Status</th>
-    <th>Exp Date</th>
+    <th>Insurance Exp. Date</th>
   </tr>
   {data.map((item, i)=>{
     return(

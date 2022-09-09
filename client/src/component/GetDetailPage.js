@@ -68,7 +68,7 @@ const GetDetailPage = (props) => {
                 //handle success
                 console.log(response);
                 removeLoader()
-                setUserData(response)
+                setUserData(response.data)
             })
             .catch(function (response) {
                 //handle error
@@ -171,7 +171,7 @@ const GetDetailPage = (props) => {
             { key: "Owner Name", value: userData.owner_name },
             { key: "Registration Number", value: userData.registration_number },
             { key: "Registration Date", value: userData.registration_date.slice(0,10 ) },
-            { key: "Insurance Uptu", value: userData.insurance_upto.slice(0,10 ) },
+            { key: "Insurance Up-to", value: userData.insurance_upto.slice(0,10 ) },
         ]
         return (
             <div className='mainUser upload'>

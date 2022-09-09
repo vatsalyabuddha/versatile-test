@@ -73,16 +73,16 @@ const Home = () => {
         return (
             <div className='home'>
                 {/* {renderData()} */}
-                <h2> Please Enter Registration Number</h2>
-                <h2> OR</h2>
-                <h2> Go To DashBoard</h2>
+                <h2 className='nav-head-main'> Insurance Verification Portal</h2>
+                {/* <h2> OR</h2>
+                <h2> Go To DashBoard</h2> */}
                 <div className='df-jc'>
-                    <div className='pad-10 mar-10'><Button btnText="Get Reg Num Data" color="red" name="getRegNumData" click={changePage} /></div>
-                    <div className='pad-10 mar-10'><Button btnText="Dashboard" color="red" name="dashboard" click={(e)=>changePage(e)} /></div>
+                    <div className='pad-10 mar-10'><Button btnText="Find Uninsured Vehicle" color="red" name="getRegNumData" click={changePage} /></div>
+                    <div className='pad-10 mar-10'><Button btnText="Dashboard Data" color="red" name="dashboard" click={(e)=>changePage(e)} /></div>
                 </div>
                 <div className='df-jc'>
-                    <div className='pad-10 mar-10'><Button btnText="Database" color="red" name="database" click={(e)=>changePage(e)} /></div>
-                    <div className='pad-10 mar-10'><Button btnText="Expiry Data" color="red" name="expData" click={(e)=>changePage(e)} /></div>
+                    <div className='pad-10 mar-10'><Button btnText="Data Filters" color="red" name="database" click={(e)=>changePage(e)} /></div>
+                    {/* <div className='pad-10 mar-10'><Button btnText="Expiry Data" color="red" name="expData" click={(e)=>changePage(e)} /></div> */}
                 </div>
             </div>
         )

@@ -460,6 +460,7 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #7de7bb;
 }
 .Dashboardmiddle{
     padding: 10px;
@@ -580,6 +581,15 @@ p {
     text-align: left;
     background-color: #9CB98F;
     color: white;
+  }
+  .nav-head-main{
+      background-color: #AB8FB9;
+      padding: 20px;
+  }
+
+  .dash-head{
+      background-color: #7de7bb;
+      padding: 40px;
   }
 
   /* =========== end table-------------- */

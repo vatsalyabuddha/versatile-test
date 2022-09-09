@@ -51,6 +51,6 @@ app.use('/upload',uploadRoute);
 
 // const PORT = process.env.PORT || 3000;
  
-http.listen(8000, '0.0.0.0',function(){;
-    console.log("listening on port 3000");
+http.listen(4000, '0.0.0.0',function(){;
+    console.log("listening on port 4000");
 });
